@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260706a" />
+  <link rel="stylesheet" href="styles.css?v=20260706b" />
 </head>
 <body>
 
@@ -28,6 +28,11 @@
       <button class="tab-btn active" data-tab="tasks"    onclick="switchTab('tasks')">✅ Tasks</button>
       <button class="tab-btn"        data-tab="calendar" onclick="switchTab('calendar')">📅 Calendar</button>
       <button class="tab-btn"        data-tab="summary"  onclick="switchTab('summary')">💰 Cost Summary</button>
+    </div>
+
+    <div class="nav-mode-toggle" id="navModeToggle">
+      <button class="nav-mode-btn active" data-mode="diy" onclick="setMode('diy')">🔨 DIY</button>
+      <button class="nav-mode-btn" data-mode="pro" onclick="setMode('pro')">👷 Pro</button>
     </div>
 
     <div class="auth-area">
@@ -64,7 +69,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js"></script>
 <script src="firebase-config.js"></script>
-<script src="auth.js?v=20260706a"></script>
-<script src="app.js?v=20260706a"></script>
+<script src="auth.js?v=20260706b"></script>
+<script src="app.js?v=20260706b"></script>
 </body>
 </html>

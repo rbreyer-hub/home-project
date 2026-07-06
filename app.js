@@ -4,109 +4,110 @@
 const STORAGE_KEY = 'homeProjectData';
 
 /* ── Seed data: all tasks with DIY + Pro estimates ──────────────────────────
-   diyCost = materials only (labor is your time)
-   proCost = full contractor price (labor + materials)
+   diyCost  = materials only (labor is your time)
+   proCost  = full contractor price (labor + materials)
    diyHours = realistic hours for a capable DIYer
+   proHours = contractor hours (pros are 2–3x faster with proper tools)
 ─────────────────────────────────────────────────────────────────────────── */
 const SEED_CATEGORIES = [
   { id:'cat-mb', name:'Master Bedroom', icon:'🛏️', tasks:[
-    { id:'mb1', name:'Finish trim on bathroom door',     diyHours:2,   diyCost:30,   proCost:150 },
-    { id:'mb2', name:'Trim on bathroom closet',          diyHours:2,   diyCost:30,   proCost:150 },
-    { id:'mb3', name:'Door for closet',                  diyHours:3,   diyCost:80,   proCost:300 },
-    { id:'mb4', name:'Barn door for bathroom',           diyHours:4,   diyCost:200,  proCost:600 },
-    { id:'mb5', name:'Caulk and paint',                  diyHours:4,   diyCost:40,   proCost:200 },
-    { id:'mb6', name:'Floor transition pieces',          diyHours:1,   diyCost:25,   proCost:100 },
-    { id:'mb7', name:'Trim for small wall in bedroom',   diyHours:1,   diyCost:20,   proCost:100 },
-    { id:'mb8', name:'Paint the door',                   diyHours:1,   diyCost:15,   proCost:80  },
-    { id:'mb9', name:'Reinstall smoke detector',         diyHours:0.5, diyCost:20,   proCost:75  },
+    { id:'mb1', name:'Finish trim on bathroom door',     diyHours:2,   proHours:0.5, diyCost:30,   proCost:150 },
+    { id:'mb2', name:'Trim on bathroom closet',          diyHours:2,   proHours:0.5, diyCost:30,   proCost:150 },
+    { id:'mb3', name:'Door for closet',                  diyHours:3,   proHours:1,   diyCost:80,   proCost:300 },
+    { id:'mb4', name:'Barn door for bathroom',           diyHours:4,   proHours:1.5, diyCost:200,  proCost:600 },
+    { id:'mb5', name:'Caulk and paint',                  diyHours:4,   proHours:1.5, diyCost:40,   proCost:200 },
+    { id:'mb6', name:'Floor transition pieces',          diyHours:1,   proHours:0.5, diyCost:25,   proCost:100 },
+    { id:'mb7', name:'Trim for small wall in bedroom',   diyHours:1,   proHours:0.5, diyCost:20,   proCost:100 },
+    { id:'mb8', name:'Paint the door',                   diyHours:1,   proHours:0.5, diyCost:15,   proCost:80  },
+    { id:'mb9', name:'Reinstall smoke detector',         diyHours:0.5, proHours:0.5, diyCost:20,   proCost:75  },
   ]},
   { id:'cat-hb', name:'Hall Bathroom', icon:'🚿', tasks:[
-    { id:'hb1', name:'Touch up paint job on the ceiling', diyHours:2, diyCost:25, proCost:150 },
+    { id:'hb1', name:'Touch up paint job on the ceiling', diyHours:2, proHours:1, diyCost:25, proCost:150 },
   ]},
   { id:'cat-hw', name:'Hallway', icon:'🚪', tasks:[
-    { id:'hw1', name:'Caulk and paint door and trim', diyHours:2, diyCost:30, proCost:150 },
+    { id:'hw1', name:'Caulk and paint door and trim', diyHours:2, proHours:1, diyCost:30, proCost:150 },
   ]},
   { id:'cat-lb', name:'Little Boys Room', icon:'🧒', tasks:[
-    { id:'lb1', name:'Trim on closet',    diyHours:2, diyCost:30,  proCost:150 },
-    { id:'lb2', name:'Doors on closet',   diyHours:3, diyCost:80,  proCost:300 },
-    { id:'lb3', name:'Flooring replaced', diyHours:8, diyCost:300, proCost:800 },
+    { id:'lb1', name:'Trim on closet',    diyHours:2, proHours:0.5, diyCost:30,  proCost:150 },
+    { id:'lb2', name:'Doors on closet',   diyHours:3, proHours:1,   diyCost:80,  proCost:300 },
+    { id:'lb3', name:'Flooring replaced', diyHours:8, proHours:3,   diyCost:300, proCost:800 },
   ]},
   { id:'cat-is', name:"Isabelle's Room", icon:'👧', tasks:[
-    { id:'is1', name:'Replace flooring',              diyHours:8, diyCost:300, proCost:800 },
-    { id:'is2', name:'Curtain or door for her closet', diyHours:1, diyCost:40,  proCost:150 },
+    { id:'is1', name:'Replace flooring',               diyHours:8, proHours:3,   diyCost:300, proCost:800 },
+    { id:'is2', name:'Curtain or door for her closet', diyHours:1, proHours:0.5, diyCost:40,  proCost:150 },
   ]},
   { id:'cat-kit', name:'Kitchen', icon:'🍳', tasks:[
-    { id:'kit1', name:'Replace caulk on kitchen counters',  diyHours:1,   diyCost:15,  proCost:100 },
-    { id:'kit2', name:'Fix oven',                            diyHours:2,   diyCost:50,  proCost:250 },
-    { id:'kit3', name:'Get a bigger propane tank for stove', diyHours:0.5, diyCost:100, proCost:200 },
+    { id:'kit1', name:'Replace caulk on kitchen counters',  diyHours:1,   proHours:0.5, diyCost:15,  proCost:100 },
+    { id:'kit2', name:'Fix oven',                            diyHours:2,   proHours:1,   diyCost:50,  proCost:250 },
+    { id:'kit3', name:'Get a bigger propane tank for stove', diyHours:0.5, proHours:0.5, diyCost:100, proCost:200 },
   ]},
   { id:'cat-dr', name:'Dining Room', icon:'🍽️', tasks:[
-    { id:'dr1', name:'Patch missing drywall on the half wall',        diyHours:4, diyCost:30, proCost:200 },
-    { id:'dr2', name:'Patch hole where internet cable comes in house', diyHours:1, diyCost:15, proCost:75  },
-    { id:'dr3', name:'Paint trim',                                     diyHours:2, diyCost:20, proCost:150 },
+    { id:'dr1', name:'Patch missing drywall on the half wall',        diyHours:4, proHours:1.5, diyCost:30, proCost:200 },
+    { id:'dr2', name:'Patch hole where internet cable comes in house', diyHours:1, proHours:0.5, diyCost:15, proCost:75  },
+    { id:'dr3', name:'Paint trim',                                     diyHours:2, proHours:1,   diyCost:20, proCost:150 },
   ]},
   { id:'cat-halfb', name:'Half Bath', icon:'🚽', tasks:[
-    { id:'halfb1', name:'Caulk and paint trim',                  diyHours:2, diyCost:30, proCost:150 },
-    { id:'halfb2', name:'Vent the bathroom from attic to outside', diyHours:4, diyCost:80, proCost:400 },
+    { id:'halfb1', name:'Caulk and paint trim',                   diyHours:2, proHours:1,   diyCost:30, proCost:150 },
+    { id:'halfb2', name:'Vent the bathroom from attic to outside', diyHours:4, proHours:1.5, diyCost:80, proCost:400 },
   ]},
   { id:'cat-lr', name:'Living Room', icon:'🛋️', tasks:[
-    { id:'lr1', name:'Paint trim',                   diyHours:3, diyCost:30, proCost:200 },
-    { id:'lr2', name:'Patch and touch up paint walls', diyHours:4, diyCost:40, proCost:250 },
-    { id:'lr3', name:'Paint door',                   diyHours:1, diyCost:15, proCost:80  },
+    { id:'lr1', name:'Paint trim',                    diyHours:3, proHours:1,   diyCost:30, proCost:200 },
+    { id:'lr2', name:'Patch and touch up paint walls', diyHours:4, proHours:1.5, diyCost:40, proCost:250 },
+    { id:'lr3', name:'Paint door',                    diyHours:1, proHours:0.5, diyCost:15, proCost:80  },
   ]},
   { id:'cat-sw', name:'Stairwell', icon:'🪜', tasks:[
-    { id:'sw1', name:'Patch drywall and paint', diyHours:4, diyCost:40, proCost:250 },
-    { id:'sw2', name:'Fix hole in the wall',    diyHours:2, diyCost:25, proCost:150 },
+    { id:'sw1', name:'Patch drywall and paint', diyHours:4, proHours:1.5, diyCost:40, proCost:250 },
+    { id:'sw2', name:'Fix hole in the wall',    diyHours:2, proHours:1,   diyCost:25, proCost:150 },
   ]},
   { id:'cat-bf', name:'Basement Family Room', icon:'🎮', tasks:[
-    { id:'bf1', name:'Soffit for ductwork',         diyHours:8,  diyCost:150, proCost:600 },
-    { id:'bf2', name:'Texture and paint soffit',    diyHours:4,  diyCost:40,  proCost:250 },
-    { id:'bf3', name:'Replace window well window',  diyHours:3,  diyCost:100, proCost:300 },
-    { id:'bf4', name:'Caulk and paint trim',        diyHours:2,  diyCost:30,  proCost:150 },
+    { id:'bf1', name:'Soffit for ductwork',        diyHours:8, proHours:3,   diyCost:150, proCost:600 },
+    { id:'bf2', name:'Texture and paint soffit',   diyHours:4, proHours:1.5, diyCost:40,  proCost:250 },
+    { id:'bf3', name:'Replace window well window', diyHours:3, proHours:1,   diyCost:100, proCost:300 },
+    { id:'bf4', name:'Caulk and paint trim',       diyHours:2, proHours:1,   diyCost:30,  proCost:150 },
   ]},
   { id:'cat-mr', name:'Mud Room', icon:'👢', tasks:[
-    { id:'mr1', name:'Drywall',    diyHours:8,  diyCost:200, proCost:800  },
-    { id:'mr2', name:'Texture',    diyHours:4,  diyCost:50,  proCost:300  },
-    { id:'mr3', name:'Paint',      diyHours:4,  diyCost:50,  proCost:250  },
-    { id:'mr4', name:'Tile floor', diyHours:12, diyCost:400, proCost:1200 },
+    { id:'mr1', name:'Drywall',    diyHours:8,  proHours:3,   diyCost:200, proCost:800  },
+    { id:'mr2', name:'Texture',    diyHours:4,  proHours:1.5, diyCost:50,  proCost:300  },
+    { id:'mr3', name:'Paint',      diyHours:4,  proHours:1.5, diyCost:50,  proCost:250  },
+    { id:'mr4', name:'Tile floor', diyHours:12, proHours:4,   diyCost:400, proCost:1200 },
   ]},
   { id:'cat-bh', name:'Basement Hallway', icon:'🏚️', tasks:[
-    { id:'bh1', name:'Soffit for ductwork', diyHours:8, diyCost:150, proCost:600 },
-    { id:'bh2', name:'Drywall',             diyHours:6, diyCost:150, proCost:600 },
-    { id:'bh3', name:'Texture and paint',   diyHours:4, diyCost:50,  proCost:300 },
-    { id:'bh4', name:'Flooring',            diyHours:8, diyCost:300, proCost:800 },
+    { id:'bh1', name:'Soffit for ductwork', diyHours:8, proHours:3,   diyCost:150, proCost:600 },
+    { id:'bh2', name:'Drywall',             diyHours:6, proHours:2,   diyCost:150, proCost:600 },
+    { id:'bh3', name:'Texture and paint',   diyHours:4, proHours:1.5, diyCost:50,  proCost:300 },
+    { id:'bh4', name:'Flooring',            diyHours:8, proHours:3,   diyCost:300, proCost:800 },
   ]},
   { id:'cat-bb', name:'Basement Bathroom', icon:'🛁', tasks:[
-    { id:'bb1', name:'Redo tile in tub area',           diyHours:16,  diyCost:400, proCost:1500 },
-    { id:'bb2', name:'Replace trim piece behind toilet', diyHours:1,   diyCost:20,  proCost:100  },
-    { id:'bb3', name:'New toilet seat',                  diyHours:0.5, diyCost:30,  proCost:100  },
-    { id:'bb4', name:'Paint door',                       diyHours:1,   diyCost:15,  proCost:80   },
-    { id:'bb5', name:'Caulk and paint trim',             diyHours:2,   diyCost:30,  proCost:150  },
+    { id:'bb1', name:'Redo tile in tub area',            diyHours:16,  proHours:6,   diyCost:400, proCost:1500 },
+    { id:'bb2', name:'Replace trim piece behind toilet', diyHours:1,   proHours:0.5, diyCost:20,  proCost:100  },
+    { id:'bb3', name:'New toilet seat',                  diyHours:0.5, proHours:0.5, diyCost:30,  proCost:100  },
+    { id:'bb4', name:'Paint door',                       diyHours:1,   proHours:0.5, diyCost:15,  proCost:80   },
+    { id:'bb5', name:'Caulk and paint trim',             diyHours:2,   proHours:1,   diyCost:30,  proCost:150  },
   ]},
   { id:'cat-bigb', name:'Big Boys Room', icon:'👦', tasks:[
-    { id:'bigb1', name:'Finish closet',         diyHours:4, diyCost:100, proCost:400 },
-    { id:'bigb2', name:'Patch hole in drywall', diyHours:2, diyCost:25,  proCost:150 },
+    { id:'bigb1', name:'Finish closet',         diyHours:4, proHours:1.5, diyCost:100, proCost:400 },
+    { id:'bigb2', name:'Patch hole in drywall', diyHours:2, proHours:1,   diyCost:25,  proCost:150 },
   ]},
   { id:'cat-la', name:"Lance and Aidan's Room", icon:'🛏️', tasks:[
-    { id:'la1', name:'Replace window well window x2', diyHours:6, diyCost:200, proCost:600 },
-    { id:'la2', name:'Fix damaged drywall',            diyHours:3, diyCost:40,  proCost:250 },
-    { id:'la3', name:'Closet door or curtain',         diyHours:1, diyCost:40,  proCost:150 },
+    { id:'la1', name:'Replace window well window x2', diyHours:6, proHours:2,   diyCost:200, proCost:600 },
+    { id:'la2', name:'Fix damaged drywall',            diyHours:3, proHours:1,   diyCost:40,  proCost:250 },
+    { id:'la3', name:'Closet door or curtain',         diyHours:1, proHours:0.5, diyCost:40,  proCost:150 },
   ]},
   { id:'cat-th', name:'Throughout the House', icon:'🏠', tasks:[
-    { id:'th1', name:'Repaint trim', diyHours:20, diyCost:150, proCost:1500 },
+    { id:'th1', name:'Repaint trim', diyHours:20, proHours:8, diyCost:150, proCost:1500 },
   ]},
   { id:'cat-out', name:'Outside', icon:'🌿', tasks:[
-    { id:'out1',  name:'Roll off dumpster for trash collection',   diyHours:0,  diyCost:400,  proCost:400  },
-    { id:'out2',  name:'Deck redone',                              diyHours:40, diyCost:1500, proCost:8000 },
-    { id:'out3',  name:'Weed whack and mow everywhere',            diyHours:8,  diyCost:0,    proCost:300  },
-    { id:'out4',  name:'Finish painting house',                    diyHours:40, diyCost:500,  proCost:3000 },
-    { id:'out5',  name:'Replace trim from dog damage',             diyHours:6,  diyCost:100,  proCost:500  },
-    { id:'out6',  name:'Replace weather stripping around doors',   diyHours:3,  diyCost:60,   proCost:200  },
-    { id:'out7',  name:'Tile front step — front door',             diyHours:4,  diyCost:100,  proCost:400  },
-    { id:'out8',  name:'Build a step into the house side entrance', diyHours:8, diyCost:200,  proCost:600  },
-    { id:'out9',  name:'Build a step for entrance from backyard',   diyHours:8, diyCost:200,  proCost:600  },
-    { id:'out10', name:'Replace ripped screens in windows',        diyHours:3,  diyCost:80,   proCost:300  },
-    { id:'out11', name:'Finish front landscape',                   diyHours:16, diyCost:500,  proCost:2000 },
+    { id:'out1',  name:'Roll off dumpster for trash collection',    diyHours:0,  proHours:0,  diyCost:400,  proCost:400  },
+    { id:'out2',  name:'Deck redone',                               diyHours:40, proHours:16, diyCost:1500, proCost:8000 },
+    { id:'out3',  name:'Weed whack and mow everywhere',             diyHours:8,  proHours:3,  diyCost:0,    proCost:300  },
+    { id:'out4',  name:'Finish painting house',                     diyHours:40, proHours:16, diyCost:500,  proCost:3000 },
+    { id:'out5',  name:'Replace trim from dog damage',              diyHours:6,  proHours:2,  diyCost:100,  proCost:500  },
+    { id:'out6',  name:'Replace weather stripping around doors',    diyHours:3,  proHours:1,  diyCost:60,   proCost:200  },
+    { id:'out7',  name:'Tile front step — front door',              diyHours:4,  proHours:2,  diyCost:100,  proCost:400  },
+    { id:'out8',  name:'Build a step into the house side entrance', diyHours:8,  proHours:3,  diyCost:200,  proCost:600  },
+    { id:'out9',  name:'Build a step for entrance from backyard',   diyHours:8,  proHours:3,  diyCost:200,  proCost:600  },
+    { id:'out10', name:'Replace ripped screens in windows',         diyHours:3,  proHours:1,  diyCost:80,   proCost:300  },
+    { id:'out11', name:'Finish front landscape',                    diyHours:16, proHours:6,  diyCost:500,  proCost:2000 },
   ]},
 ];
 
@@ -148,6 +149,7 @@ function normalizeTasks(cats) {
       completed: !!t.completed,
       dueDate: t.dueDate || null,
       diyHours: t.diyHours ?? 1,
+      proHours: t.proHours ?? Math.max(0.5, Math.round((t.diyHours ?? 1) / 2.5 * 2) / 2),
       diyCost: t.diyCost ?? 0,
       proCost: t.proCost ?? 0,
       notes: t.notes || '',
@@ -198,22 +200,22 @@ function switchTab(tab) {
 /* ── Mode toggle ── */
 function setMode(m) {
   state.mode = m;
-  document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === m));
+  document.querySelectorAll('.mode-btn, .nav-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === m));
   save();
   render();
 }
 
 /* ── Computed totals ── */
 function calcTotals(cats) {
-  let totalTasks = 0, doneTasks = 0, diyHours = 0, diyCost = 0, proCost = 0;
+  let totalTasks = 0, doneTasks = 0, diyHours = 0, proHours = 0, diyCost = 0, proCost = 0;
   cats.forEach(cat => {
     cat.tasks.forEach(t => {
       totalTasks++;
       if (t.completed) doneTasks++;
-      else { diyHours += t.diyHours; diyCost += t.diyCost; proCost += t.proCost; }
+      else { diyHours += t.diyHours; proHours += t.proHours; diyCost += t.diyCost; proCost += t.proCost; }
     });
   });
-  return { totalTasks, doneTasks, diyHours, diyCost, proCost };
+  return { totalTasks, doneTasks, diyHours, proHours, diyCost, proCost };
 }
 
 /* ── Main render ── */
@@ -232,8 +234,9 @@ function renderTasks() {
   const totals = calcTotals(state.categories);
   const pct = totals.totalTasks > 0 ? Math.round((totals.doneTasks / totals.totalTasks) * 100) : 0;
 
-  const remaining = state.mode === 'diy' ? totals.diyCost : totals.proCost;
-  const modeLabel = state.mode === 'diy' ? 'DIY' : 'Pro';
+  const remaining  = state.mode === 'diy' ? totals.diyCost : totals.proCost;
+  const hoursLeft  = state.mode === 'diy' ? totals.diyHours : totals.proHours;
+  const modeLabel  = state.mode === 'diy' ? 'DIY' : 'Pro';
 
   pane.innerHTML = `
     ${window.isReadOnly ? '' : `
@@ -255,7 +258,7 @@ function renderTasks() {
       </div>
       <div class="progress-stats">
         <span>✅ ${totals.doneTasks} of ${totals.totalTasks} tasks complete</span>
-        <span>⏱ ${fmtHrs(totals.diyHours)} remaining</span>
+        <span>⏱ ${fmtHrs(hoursLeft)} remaining</span>
         <span>💰 ${fmt$(remaining)} remaining cost</span>
       </div>
     </div>
@@ -331,7 +334,7 @@ function renderTask(catId, t) {
         <input type="date" class="task-date-input" value="${t.dueDate || ''}"
           style="${isOverdue ? 'border-color:var(--red);color:var(--red)' : ''}"
           onchange="setDueDate('${catId}','${t.id}',this.value)" title="Due date" />
-        <span class="task-pill pill-hours">⏱ ${fmtHrs(t.diyHours)}</span>
+        <span class="task-pill pill-hours">⏱ ${fmtHrs(state.mode === 'diy' ? t.diyHours : t.proHours)}</span>
         <span class="task-pill pill-cost${state.mode==='pro'?' pro':''}">
           ${state.mode==='diy' ? '🔨' : '👷'} ${fmt$(cost)}
         </span>
@@ -536,9 +539,11 @@ function renderSummary() {
     const done = cat.tasks.filter(t => t.completed).length;
     const total = cat.tasks.length;
     const catPct = total > 0 ? Math.round((done / total) * 100) : 0;
-    const catDiy  = cat.tasks.filter(t=>!t.completed).reduce((s,t)=>s+t.diyCost,0);
-    const catPro  = cat.tasks.filter(t=>!t.completed).reduce((s,t)=>s+t.proCost,0);
-    const catHrs  = cat.tasks.filter(t=>!t.completed).reduce((s,t)=>s+t.diyHours,0);
+    const catDiy     = cat.tasks.filter(t=>!t.completed).reduce((s,t)=>s+t.diyCost,0);
+    const catPro     = cat.tasks.filter(t=>!t.completed).reduce((s,t)=>s+t.proCost,0);
+    const catDiyHrs  = cat.tasks.filter(t=>!t.completed).reduce((s,t)=>s+t.diyHours,0);
+    const catProHrs  = cat.tasks.filter(t=>!t.completed).reduce((s,t)=>s+t.proHours,0);
+    const catHrs     = state.mode === 'diy' ? catDiyHrs : catProHrs;
     const shown   = state.mode === 'diy' ? catDiy : catPro;
     return `<tr>
       <td>${cat.icon} ${cat.name}</td>
@@ -569,8 +574,8 @@ function renderSummary() {
       </div>
       <div class="stat-card">
         <div class="stat-label">Hours Remaining</div>
-        <div class="stat-value">${totals.diyHours}</div>
-        <div class="stat-sub">DIY hours left</div>
+        <div class="stat-value">${state.mode === 'diy' ? totals.diyHours : totals.proHours}</div>
+        <div class="stat-sub">${state.mode === 'diy' ? 'DIY' : 'Pro'} hours left</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">${state.mode === 'diy' ? 'DIY' : 'Pro'} Cost Left</div>
@@ -606,7 +611,7 @@ function renderSummary() {
       </div>
       <div style="text-align:right">
         <div class="total-bar-amount">${fmt$(currentCost)}</div>
-        <div class="total-bar-hours">${fmtHrs(totals.diyHours)} of work remaining</div>
+        <div class="total-bar-hours">${fmtHrs(state.mode === 'diy' ? totals.diyHours : totals.proHours)} of work remaining</div>
       </div>
     </div>
   `;
@@ -614,8 +619,7 @@ function renderSummary() {
 
 /* ── Boot ── */
 document.addEventListener('DOMContentLoaded', () => {
-  if (!window.isReadOnly) {
-    load();
-  }
+  if (!window.isReadOnly) load();
+  document.querySelectorAll('.nav-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === state.mode));
   render();
 });

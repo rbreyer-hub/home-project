@@ -54,6 +54,19 @@ body { font-family: 'Inter', sans-serif; background: #f5f3ef; color: #1a1a1a; mi
 .tab-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
 .tab-btn.active { background: rgba(255,255,255,0.2); color: #fff; font-weight: 700; }
 
+/* ── Nav mode toggle ── */
+.nav-mode-toggle {
+  display: flex; background: rgba(0,0,0,0.25); border-radius: 8px;
+  padding: 3px; gap: 2px;
+}
+.nav-mode-btn {
+  background: transparent; border: none; color: rgba(255,255,255,0.7);
+  padding: 5px 12px; border-radius: 6px; cursor: pointer;
+  font-size: 0.8rem; font-weight: 600; transition: all 0.15s; white-space: nowrap;
+}
+.nav-mode-btn:hover { color: #fff; background: rgba(255,255,255,0.15); }
+.nav-mode-btn.active { background: rgba(255,255,255,0.25); color: #fff; }
+
 /* ── Auth area ── */
 .auth-area { display: flex; align-items: center; gap: 8px; }
 .btn-auth-signin {
