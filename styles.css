@@ -183,9 +183,12 @@ body { font-family: 'Inter', sans-serif; background: #f5f3ef; color: #1a1a1a; mi
 .task-detail-row { display: flex; align-items: center; gap: 12px; margin-top: 6px; flex-wrap: wrap; }
 .task-date-input {
   border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px;
-  font-size: 0.78rem; color: var(--text); background: var(--surface-2); cursor: pointer;
-  font-family: inherit;
+  font-size: 0.78rem; color: var(--green-dk); background: var(--surface-2); cursor: pointer;
+  font-family: inherit; font-weight: 600; max-width: 140px; min-width: 0;
+  -webkit-appearance: none; appearance: none;
 }
+.task-date-input::-webkit-date-and-time-value { text-align: left; color: var(--green-dk); }
+.task-date-input::-webkit-calendar-picker-indicator { opacity: 0.6; cursor: pointer; flex-shrink: 0; }
 .task-date-input:focus { outline: 2px solid var(--green); border-color: var(--green); }
 .task-pill {
   display: inline-flex; align-items: center; gap: 4px;
