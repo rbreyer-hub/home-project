@@ -1,23 +1,32 @@
-// Firebase config — fill in with your Firebase project credentials
-// You can reuse the same Firebase project as the debt/budget planners
+/*
+  Home Project — Firebase config
+  ─────────────────────────────────────────────────────────────────
+  Reuses the same Firebase project as budget-planner-web.
+  The authorized domain (rbreyer-hub.github.io) is already set.
+
+  Firestore path: users/{uid}/homeProject/main
+
+  IMPORTANT: The share link feature requires public reads on this path.
+  Update your Firestore security rules to include:
+
+    match /users/{userId}/homeProject/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+  The existing catch-all rule:
+    match /users/{userId}/{document=**} { allow read, write: if request.auth.uid == userId; }
+  will NOT cover public reads — you need the explicit rule above added.
+  ─────────────────────────────────────────────────────────────────
+*/
+
 const firebaseConfig = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_PROJECT.firebaseapp.com",
-  projectId:         "YOUR_PROJECT_ID",
-  storageBucket:     "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId:             "YOUR_APP_ID"
+  apiKey:            "AIzaSyDwagvEPiQDLre2k6rku_pkwyKcBOxBnwE",
+  authDomain:        "budget-planner-fb.firebaseapp.com",
+  projectId:         "budget-planner-fb",
+  storageBucket:     "budget-planner-fb.firebasestorage.app",
+  messagingSenderId: "682449918354",
+  appId:             "1:682449918354:web:c132bcec3976ce1988094b"
 };
 
 firebase.initializeApp(firebaseConfig);
-
-// Firestore security rules needed:
-// rules_version = '2';
-// service cloud.firestore {
-//   match /databases/{database}/documents {
-//     match /users/{userId}/homeProject/{doc} {
-//       allow read: if true;                              // public read for share links
-//       allow write: if request.auth != null && request.auth.uid == userId;
-//     }
-//   }
-// }
