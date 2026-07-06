@@ -234,20 +234,10 @@ function renderTasks() {
   const totals = calcTotals(state.categories);
   const pct = totals.totalTasks > 0 ? Math.round((totals.doneTasks / totals.totalTasks) * 100) : 0;
 
-  const remaining  = state.mode === 'diy' ? totals.diyCost : totals.proCost;
-  const hoursLeft  = state.mode === 'diy' ? totals.diyHours : totals.proHours;
-  const modeLabel  = state.mode === 'diy' ? 'DIY' : 'Pro';
+  const remaining = state.mode === 'diy' ? totals.diyCost : totals.proCost;
+  const hoursLeft = state.mode === 'diy' ? totals.diyHours : totals.proHours;
 
   pane.innerHTML = `
-    ${window.isReadOnly ? '' : `
-    <div class="mode-toggle-wrap">
-      <div class="mode-toggle">
-        <button class="mode-btn${state.mode==='diy'?' active':''}" data-mode="diy" onclick="setMode('diy')">🔨 DIY</button>
-        <button class="mode-btn${state.mode==='pro'?' active':''}" data-mode="pro" onclick="setMode('pro')">👷 Professional</button>
-      </div>
-      <span class="mode-label">Showing ${modeLabel} estimates</span>
-    </div>`}
-
     <div class="progress-wrap">
       <div class="progress-header">
         <span class="progress-title">Overall Progress</span>
@@ -558,14 +548,6 @@ function renderSummary() {
   }).join('');
 
   pane.innerHTML = `
-    <div class="mode-toggle-wrap">
-      <div class="mode-toggle">
-        <button class="mode-btn${state.mode==='diy'?' active':''}" data-mode="diy" onclick="setMode('diy')">🔨 DIY</button>
-        <button class="mode-btn${state.mode==='pro'?' active':''}" data-mode="pro" onclick="setMode('pro')">👷 Professional</button>
-      </div>
-      <span class="mode-label">Showing ${state.mode === 'diy' ? 'DIY' : 'Professional'} estimates</span>
-    </div>
-
     <div class="summary-grid">
       <div class="stat-card">
         <div class="stat-label">Tasks Complete</div>
