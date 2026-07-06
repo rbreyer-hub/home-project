@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="32" fill="#2e6b47"/>
+  <!-- Roof -->
+  <polygon points="32,10 56,30 8,30" fill="#ffffff"/>
+  <!-- Roof ridge cap -->
+  <polygon points="32,10 56,30 52,30 32,14 12,30 8,30" fill="#d4edda"/>
+  <!-- House body -->
+  <rect x="14" y="29" width="36" height="24" rx="1" fill="#ffffff"/>
+  <!-- Door -->
+  <rect x="26" y="38" width="12" height="15" rx="2" fill="#2e6b47"/>
+  <!-- Door knob -->
+  <circle cx="35" cy="46" r="1.2" fill="#d4edda"/>
+  <!-- Left window -->
+  <rect x="17" y="34" width="7" height="6" rx="1" fill="#a8d5be"/>
+  <line x1="20.5" y1="34" x2="20.5" y2="40" stroke="#2e6b47" stroke-width="0.8"/>
+  <line x1="17" y1="37" x2="24" y2="37" stroke="#2e6b47" stroke-width="0.8"/>
+  <!-- Right window -->
+  <rect x="40" y="34" width="7" height="6" rx="1" fill="#a8d5be"/>
+  <line x1="43.5" y1="34" x2="43.5" y2="40" stroke="#2e6b47" stroke-width="0.8"/>
+  <line x1="40" y1="37" x2="47" y2="37" stroke="#2e6b47" stroke-width="0.8"/>
+  <!-- Chimney -->
+  <rect x="42" y="13" width="6" height="10" rx="1" fill="#ffffff"/>
+  <rect x="41" y="12" width="8" height="3" rx="1" fill="#d4edda"/>
+</svg>
