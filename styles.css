@@ -198,6 +198,15 @@ body { font-family: 'Inter', sans-serif; background: #f5f3ef; color: #1a1a1a; mi
 .pill-cost { background: var(--green-lt); color: var(--green-dk); }
 .pill-cost.pro { background: var(--amber-lt); color: #92400e; }
 
+.pill-input {
+  background: transparent; border: none; border-bottom: 1px solid currentColor;
+  color: inherit; font: inherit; font-size: 0.75rem; font-weight: 600;
+  width: 36px; outline: none; padding: 0 1px; text-align: center;
+}
+.pill-input-cost { width: 52px; }
+.pill-input::-webkit-inner-spin-button { opacity: 0.5; cursor: pointer; }
+.pill-input:focus { border-bottom-width: 2px; }
+
 .task-notes-toggle {
   background: none; border: none; color: var(--muted); cursor: pointer;
   font-size: 0.75rem; padding: 0; text-decoration: underline;

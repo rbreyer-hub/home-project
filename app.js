@@ -313,7 +313,24 @@ function renderCategory(cat) {
 
 function renderTask(catId, t) {
   const cost = state.mode === 'diy' ? t.diyCost : t.proCost;
+  const hours = state.mode === 'diy' ? t.diyHours : t.proHours;
   const isOverdue = t.dueDate && !t.completed && t.dueDate < todayIso();
+  const modeLabel = state.mode === 'diy' ? 'DIY' : 'Pro';
+
+  const hoursPill = window.isReadOnly
+    ? `<span class="task-pill pill-hours">⏱ ${fmtHrs(hours)}</span>`
+    : `<span class="task-pill pill-hours" title="Edit ${modeLabel} hours">⏱ <input type="number" class="pill-input" min="0" step="0.5" value="${hours}"
+         onchange="updateHours('${catId}','${t.id}',this.value)" /> hrs</span>`;
+
+  const costPill = window.isReadOnly
+    ? `<span class="task-pill pill-cost${state.mode==='pro'?' pro':''}">
+         ${state.mode==='diy' ? '🔨' : '👷'} ${fmt$(cost)}
+       </span>`
+    : `<span class="task-pill pill-cost${state.mode==='pro'?' pro':''}" title="Edit ${modeLabel} cost">
+         ${state.mode==='diy' ? '🔨' : '👷'} $<input type="number" class="pill-input pill-input-cost" min="0" step="1" value="${cost}"
+           onchange="updateCost('${catId}','${t.id}',this.value)" />
+       </span>`;
+
   return `
   <div class="task-row${t.completed ? ' completed' : ''}" id="task-${t.id}">
     <input type="checkbox" class="task-checkbox" ${t.completed ? 'checked' : ''}
@@ -324,10 +341,8 @@ function renderTask(catId, t) {
         <input type="date" class="task-date-input" value="${t.dueDate || ''}"
           style="${isOverdue ? 'border-color:var(--red);color:var(--red)' : ''}"
           onchange="setDueDate('${catId}','${t.id}',this.value)" title="Due date" />
-        <span class="task-pill pill-hours">⏱ ${fmtHrs(state.mode === 'diy' ? t.diyHours : t.proHours)}</span>
-        <span class="task-pill pill-cost${state.mode==='pro'?' pro':''}">
-          ${state.mode==='diy' ? '🔨' : '👷'} ${fmt$(cost)}
-        </span>
+        ${hoursPill}
+        ${costPill}
         ${!window.isReadOnly ? `<button class="task-notes-toggle" onclick="toggleNotes('${t.id}')">notes</button>` : ''}
       </div>
       <div class="task-notes-wrap" id="notes-${t.id}">
@@ -364,6 +379,26 @@ function saveNotes(catId, taskId, val) {
   const cat = state.categories.find(c => c.id === catId);
   const task = cat?.tasks.find(t => t.id === taskId);
   if (task) { task.notes = val; save(); }
+}
+
+function updateHours(catId, taskId, val) {
+  const cat = state.categories.find(c => c.id === catId);
+  const task = cat?.tasks.find(t => t.id === taskId);
+  if (!task) return;
+  const n = parseFloat(val) || 0;
+  if (state.mode === 'diy') task.diyHours = n;
+  else task.proHours = n;
+  save();
+}
+
+function updateCost(catId, taskId, val) {
+  const cat = state.categories.find(c => c.id === catId);
+  const task = cat?.tasks.find(t => t.id === taskId);
+  if (!task) return;
+  const n = parseFloat(val) || 0;
+  if (state.mode === 'diy') task.diyCost = n;
+  else task.proCost = n;
+  save();
 }
 
 function toggleNotes(taskId) {
